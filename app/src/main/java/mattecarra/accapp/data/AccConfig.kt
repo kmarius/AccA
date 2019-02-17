@@ -2,7 +2,6 @@ package mattecarra.accapp.data
 
 import android.os.Parcel
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
 import mattecarra.accapp.utils.AccUtils
 
 class Cooldown(charge: Int, pause: Int, hasChanges: Boolean = false): Parcelable {

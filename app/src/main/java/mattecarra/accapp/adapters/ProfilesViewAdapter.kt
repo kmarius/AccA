@@ -1,19 +1,37 @@
 package mattecarra.accapp.adapters
 
 import android.os.Bundle
+import android.os.Parcel
 import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.parcel.Parcelize
 import mattecarra.accapp.R
 import java.util.ArrayList
 
-@Parcelize
-data class Profile(var profileName: String): Parcelable
+class Profile(var profileName: String): Parcelable {
+    constructor(parcel: Parcel) : this(parcel.readString())
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(profileName)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<Profile> {
+        override fun createFromParcel(parcel: Parcel): Profile {
+            return Profile(parcel)
+        }
+
+        override fun newArray(size: Int): Array<Profile?> {
+            return arrayOfNulls(size)
+        }
+    }
+}
 
 class ProfilesViewAdapter(val profiles: ArrayList<Profile>, var selectedProfile: String?, private val listener: (Profile, Boolean) -> Unit) : RecyclerView.Adapter<ProfilesViewAdapter.ProfileViewHolder>() {
     fun add(profile: Profile) {
