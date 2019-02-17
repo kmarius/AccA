@@ -167,15 +167,33 @@ class AccConfig(
     val capacity: Capacity,
     var cooldown: Cooldown?,
     val temp: Temp,
-    var resetUnplugged: Boolean,
-    var onBootExit: Boolean,
-    var onBoot: String?,
+    resetUnplugged: Boolean,
+    onBootExit: Boolean,
+    onBoot: String?,
     hasChanges: Boolean = false): Parcelable {
 
     private var localHasChanges = hasChanges
 
     val hasChanges: Boolean
         get() = capacity.hasChanges || cooldown?.hasChanges == true || temp.hasChanges || localHasChanges
+
+    var resetUnplugged: Boolean = resetUnplugged
+        set(value) {
+            field = value
+            localHasChanges = true
+        }
+
+    var onBootExit: Boolean = onBootExit
+        set(value) {
+            field = value
+            localHasChanges = true
+        }
+
+    var onBoot: String? = onBoot
+        set(value) {
+            field = value
+            localHasChanges = true
+        }
 
     constructor(parcel: Parcel) : this(
         Capacity.createFromParcel(parcel),
