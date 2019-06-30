@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
           package="mattecarra.accapp">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
@@ -55,5 +55,11 @@
         </service>
 
         <receiver android:name="com.github.javiersantos.appupdater.NotificationReceiver"/>
+        <receiver android:name=".AccBroadcastReceiver"
+                  tools:ignore="ExportedReceiver">
+            <intent-filter>
+                <action android:name="mattecarra.accapp.action.PROFILE_SET"/>
+            </intent-filter>
+        </receiver>
     </application>
 </manifest>
